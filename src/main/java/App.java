@@ -1,3 +1,5 @@
+import con.stone.entity.FullName;
+import con.stone.entity.Laptop;
 import con.stone.entity.Person;
 import con.stone.mysql.MySqlDB;
 import con.stone.utils.HibernateUtils;
@@ -8,14 +10,18 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-public class Main {
+public class App {
 
     public static void main(String[] args) {
-        MySqlDB db=new MySqlDB();
-        db.init();
+        Laptop laptop=new Laptop();
+        laptop.setBrand("Dell");
+        laptop.setDescription("it for sell");
+
+
         Person person=new Person();
-        person.setName("Mg Mg");
+        person.setFullName(new FullName("mg ","mg"));
         person.setAge(24);
+        person.setLaptop(laptop);
 
 
 

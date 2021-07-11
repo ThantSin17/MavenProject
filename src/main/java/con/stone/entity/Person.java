@@ -9,12 +9,16 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table
-public class Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
+public class Person extends BaseEntity<Long>{
+    @Embedded
+    private FullName fullName;
+
+    @Column(length = 3)
     private int age;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "laptop_id")
+    private Laptop laptop;
 
 
 
