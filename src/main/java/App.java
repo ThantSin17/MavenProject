@@ -23,12 +23,19 @@ public class App {
         person.setAge(24);
         person.setLaptop(laptop);
 
+        Person person1=new Person();
+        person1.setFullName(new FullName("hla ","hla"));
+        person1.setAge(24);
+        person1.setLaptop(laptop);
+
 
 
         Session session=HibernateUtils.getSessionFactory().openSession();
         Transaction transaction=session.beginTransaction();
 
         session.save(person);
+        session.save(person1);
+
         transaction.commit();
         session.close();
 
