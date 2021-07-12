@@ -1,14 +1,16 @@
+import con.stone.dao.LaptopDaoImpl;
+import con.stone.dao.PersonDaoImpl;
 import con.stone.entity.FullName;
 import con.stone.entity.Laptop;
 import con.stone.entity.Person;
-import con.stone.mysql.MySqlDB;
+import con.stone.repository.LaptopRepository;
+import con.stone.repository.PersonRepository;
 import con.stone.utils.HibernateUtils;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
+
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class App {
 
@@ -29,18 +31,21 @@ public class App {
         person1.setLaptop(laptop);
 
 
+        PersonRepository personRepo=new PersonDaoImpl();
+       
+        //personRepo.save(person);
+        //personRepo.save(person1);
 
-        Session session=HibernateUtils.getSessionFactory().openSession();
-        Transaction transaction=session.beginTransaction();
+        List<Person> people=personRepo.findAll();
+        for (Person p:people){
+            System.out.println(p.getFullName().getFirstName());
+        }
 
-        session.save(person);
-        session.save(person1);
-
-        transaction.commit();
-        session.close();
-
-
-
+        LaptopRepository laptopRepo=new LaptopDaoImpl();
+        List<Laptop> laptops=laptopRepo.findAll();
+        for (Laptop laptop1:laptops){
+            System.out.println(laptop1.getBrand());
+        }
 
     }
 }
