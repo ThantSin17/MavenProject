@@ -1,6 +1,5 @@
 package con.stone.dao;
 
-import con.stone.dao.AbstractDaoImpl;
 import con.stone.entity.Person;
 import con.stone.repository.PersonRepository;
 
@@ -24,5 +23,20 @@ public class PersonDaoImpl extends AbstractDaoImpl<Person,Integer> implements Pe
     @Override
     public List<Person> findAll() {
         return super.findAll();
+    }
+
+    @Override
+    public Person update(Person entity) {
+        return super.update(entity);
+    }
+
+    @Override
+    public void delete(Person entity) {
+        super.delete(entity);
+    }
+
+    @Override
+    public void deleteById(Integer integer) {
+        super.deleteById(integer);
     }
 }

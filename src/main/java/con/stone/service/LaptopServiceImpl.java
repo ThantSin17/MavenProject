@@ -29,6 +29,22 @@ public class LaptopServiceImpl implements LaptopService{
     }
 
     @Override
+    public LaptopDto update(LaptopDto entity) {
+        return null;
+    }
+
+    @Override
+    public void delete(LaptopDto entity) {
+
+    }
+
+    @Override
+    public void deleteById(Integer integer) {
+
+    }
+
+
+    @Override
     public List<LaptopDto> findAll() {
 
         List<Laptop> laptopList=repository.findAll();

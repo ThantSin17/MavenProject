@@ -54,6 +54,49 @@ public class AbstractDaoImpl<T,ID extends Comparable<ID>> implements AbstractDao
     }
 
     @Override
+    public T update(T entity) {
+        try{
+            startOperation();
+            entity= (T) session.merge(entity);
+
+            transaction.commit();
+        }catch (HibernateException e){
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+        return  entity;
+    }
+
+    @Override
+    public void delete(T entity) {
+        try{
+            startOperation();
+            session.delete(entity);
+            transaction.commit();
+        }catch (HibernateException e){
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void deleteById(ID id) {
+        T entity=findOne(id);
+        try{
+            startOperation();
+            session.delete(entity);
+            transaction.commit();
+        }catch (HibernateException e){
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+    }
+
+
+    @Override
     public List<T> findAll() {
         List<Person> people=null;
         try{

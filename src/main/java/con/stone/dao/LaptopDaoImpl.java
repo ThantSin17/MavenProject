@@ -24,4 +24,19 @@ public class LaptopDaoImpl extends AbstractDaoImpl<Laptop,Integer> implements La
     public List<Laptop> findAll() {
         return super.findAll();
     }
+
+    @Override
+    public Laptop update(Laptop entity) {
+        return super.update(entity);
+    }
+
+    @Override
+    public void delete(Laptop entity) {
+        super.delete(entity);
+    }
+
+    @Override
+    public void deleteById(Integer integer) {
+        super.deleteById(integer);
+    }
 }

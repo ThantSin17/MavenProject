@@ -1,6 +1,5 @@
 package con.stone.service;
 
-import con.stone.dao.PersonDaoImpl;
 import con.stone.dto.PersonDto;
 import con.stone.entity.Person;
 import con.stone.repository.PersonRepository;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonServiceImpl implements PersonService{
-    private PersonRepository repo=null;
+    private PersonRepository repo;
 
     public PersonServiceImpl(PersonRepository repository) {
         this.repo=repository;
@@ -18,8 +17,7 @@ public class PersonServiceImpl implements PersonService{
     @Override
     public PersonDto findOne(Integer integer) {
         Person person=repo.findOne(integer);
-        PersonDto dto=new PersonDto(person);
-        return dto;
+        return new PersonDto(person);
     }
 
     @Override
@@ -28,6 +26,23 @@ public class PersonServiceImpl implements PersonService{
 
         return new PersonDto(person);
     }
+
+    @Override
+    public PersonDto update(PersonDto entity) {
+        Person person=repo.update(entity.getEntity());
+        return new PersonDto(person);
+    }
+
+    @Override
+    public void delete(PersonDto entity) {
+        repo.delete(entity.getEntity());
+    }
+
+    @Override
+    public void deleteById(Integer integer) {
+        repo.deleteById(integer);
+    }
+
 
     @Override
     public List<PersonDto> findAll() {
