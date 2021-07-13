@@ -10,13 +10,30 @@ import javax.persistence.TypedQuery;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-public class AbstractDaoImpl<T> implements AbstractDao<T> {
+public class AbstractDaoImpl<T,ID extends Comparable<ID>> implements AbstractDao<T,ID> {
     private Class<T> entityName;
     private Session session=null;
     private Transaction transaction=null;
 
     public AbstractDaoImpl(){
         this.entityName= (Class<T>) ((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    }
+
+    @Override
+    public T findOne(ID id) {
+        T entity=null;
+        try{
+            startOperation();
+            entity= session.get(entityName,id);
+            transaction.commit();
+        }catch (HibernateException e){
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+
+
+        return entity;
     }
 
     @Override

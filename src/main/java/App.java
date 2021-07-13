@@ -47,5 +47,12 @@ public class App {
             System.out.println(laptop1.getBrand());
         }
 
+
+            Person p=personRepo.findOne(3);
+
+        Laptop l=laptopRepo.findOne(1);
+        System.out.println(l.getBrand());
+
+
     }
 }

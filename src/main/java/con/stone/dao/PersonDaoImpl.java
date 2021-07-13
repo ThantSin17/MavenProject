@@ -6,10 +6,16 @@ import con.stone.repository.PersonRepository;
 
 import java.util.List;
 
-public class PersonDaoImpl extends AbstractDaoImpl<Person> implements PersonRepository {
+public class PersonDaoImpl extends AbstractDaoImpl<Person,Integer> implements PersonRepository {
     public PersonDaoImpl(){
         super();
     }
+
+    @Override
+    public Person findOne(Integer integer) {
+        return super.findOne(integer);
+    }
+
     @Override
     public Person save(Person entity) {
         return super.save(entity);
